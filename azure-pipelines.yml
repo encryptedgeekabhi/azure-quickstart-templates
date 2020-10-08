@@ -1,0 +1,21 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  displayName: 'ARM Template deployment: Resource Group scope'
+  inputs:
+    azureResourceManagerConnection: 'Free Trial (2d3ac388-03dc-4c7c-ba79-ca3a8a09f2fd)-7859'
+    subscriptionId: '2d3ac388-03dc-4c7c-ba79-ca3a8a09f2fd'
+    resourceGroupName: myvm
+    location: 'East US'
+    csmFile: 101-aks-advanced-networking/azuredeploy.json
+    csmParametersFile: 101-aks-advanced-networking/azuredeploy.parameters.json
